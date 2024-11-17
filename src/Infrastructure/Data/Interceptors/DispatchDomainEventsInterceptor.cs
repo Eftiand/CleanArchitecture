@@ -1,5 +1,4 @@
-﻿using CleanArchitecture.Domain.Common;
-using CleanArchitecture.Domain.Common.BaseEntities;
+﻿using CleanArchitecture.Domain.Common.BaseEntities;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -29,7 +28,8 @@ public class DispatchDomainEventsInterceptor(IPublishEndpoint sender) : SaveChan
         var entities = context.ChangeTracker
             .Entries<BaseEntity>()
             .Where(e => e.Entity.DomainEvents.Any())
-            .Select(e => e.Entity);
+            .Select(e => e.Entity)
+            .ToList();
 
         var domainEvents = entities
             .SelectMany(e => e.DomainEvents)

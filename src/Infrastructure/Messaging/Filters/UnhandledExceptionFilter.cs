@@ -18,6 +18,7 @@ public class UnhandledExceptionFilter<TMessage>(ILogger<UnhandledExceptionFilter
             var messageType = typeof(TMessage).Name;
             logger.LogError(ex, "CleanArchitecture Consumer: Unhandled Exception for Message {Name} {@Message}", messageType, context.Message);
             throw;
+
         }
     }
 

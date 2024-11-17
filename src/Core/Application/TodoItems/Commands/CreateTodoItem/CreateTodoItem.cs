@@ -7,7 +7,6 @@ using MassTransit;
 
 namespace CleanArchitecture.Application.TodoItems.Commands.CreateTodoItem;
 
-[Authorize]
 public record CreateTodoItemCommand(int ListId, string? Title = null) : BaseCommand<TodoItemCreatedResponse>;
 public record TodoItemCreatedResponse(Guid Id);
 
