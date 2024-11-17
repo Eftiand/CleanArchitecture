@@ -11,9 +11,17 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
         Exception exception,
         CancellationToken cancellationToken)
     {
+        int statusCode = StatusCodes.Status500InternalServerError;
+        if (exception is RequestFaultException requestFaultException)
+        {
+            var faultException = requestFaultException?.Fault?.Exceptions.SingleOrDefault();
+            if (faultException != null)
+            {
+            }
+        }
+
         logger.LogError(
             exception, "Exception occurred: {Message}", exception.Message);
-        int statusCode = StatusCodes.Status401Unauthorized;
         if (exception.Data.Contains("StatusCode") && exception.Data["StatusCode"] is int code)
         {
             statusCode = code;

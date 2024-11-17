@@ -1,4 +1,6 @@
-﻿using CleanArchitecture.Application.Common.Exceptions;
+﻿using System.Diagnostics;
+using System.Net;
+using CleanArchitecture.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +19,7 @@ public class CustomExceptionHandler : IExceptionHandler
                 { typeof(NotFoundException), HandleNotFoundException },
                 { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
                 { typeof(ForbiddenAccessException), HandleForbiddenAccessException },
+                { typeof(RequestFaultException), HandleRequestFaultException },
             };
     }
 
@@ -83,6 +86,30 @@ public class CustomExceptionHandler : IExceptionHandler
             Status = StatusCodes.Status403Forbidden,
             Title = "Forbidden",
             Type = "https://tools.ietf.org/html/rfc7231#section-6.5.3"
+        });
+    }
+
+    private async Task HandleRequestFaultException(HttpContext httpContext, Exception ex)
+    {
+        var statusCode = (int)HttpStatusCode.InternalServerError;
+        var title = "Internal Server Error";
+        if (ex is RequestFaultException requestFaultException)
+        {
+            var faultException = requestFaultException?.Fault?.Exceptions.SingleOrDefault();
+
+            if (faultException?.Data != null && faultException.Data.TryGetValue("StatusCode", out var value))
+            {
+                statusCode = (int)value;
+                title = faultException.Message;
+            }
+        }
+
+        httpContext.Response.StatusCode = statusCode;
+
+        await httpContext.Response.WriteAsJsonAsync(new ProblemDetails
+        {
+            Status = statusCode,
+            Title = title
         });
     }
 }

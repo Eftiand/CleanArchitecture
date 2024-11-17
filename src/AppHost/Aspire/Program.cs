@@ -7,7 +7,8 @@ var postgres = builder.AddPostgres("postgres")
 var rabbitmq = builder.AddRabbitMQ("rabbitmq")
     .WithManagementPlugin()
     .WithEnvironment("RABBITMQ_DEFAULT_USER", "guest")
-    .WithEnvironment("RABBITMQ_DEFAULT_PASS", "guest");
+    .WithEnvironment("RABBITMQ_DEFAULT_PASS", "guest")
+    .WithVolume("rabbitmq-data", "/var/lib/rabbitmq");
 
 builder.AddProject<Projects.Web>("web-api")
     .WithReference(postgres)
