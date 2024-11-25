@@ -1,4 +1,4 @@
-using Shared.Contracts.Messaging;
+using CleanArchitecture.Shared.Contracts.Messaging;
 
 namespace CleanArchitecture.Infrastructure.Common.Extensions;
 

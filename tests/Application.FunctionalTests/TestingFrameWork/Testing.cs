@@ -1,51 +1,68 @@
-﻿using System.Windows.Input;
-using CleanArchitecture.Domain.Constants;
-using CleanArchitecture.Domain.Messaging;
-using CleanArchitecture.Infrastructure.Data;
+﻿using CleanArchitecture.Domain.Constants;
 using CleanArchitecture.Infrastructure.Identity;
 using MassTransit;
+using MassTransit.Testing;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ICommand = CleanArchitecture.Domain.Messaging.ICommand;
+using ICommand = CleanArchitecture.Shared.Contracts.Messaging.ICommand;
 
-namespace CleanArchitecture.Application.FunctionalTests;
+namespace CleanArchitecture.Application.FunctionalTests.TestingFrameWork;
 
 [SetUpFixture]
-public partial class Testing
+public abstract class Testing
 {
     private static ITestDatabase _database = null!;
     private static CustomWebApplicationFactory _factory = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
     private static string? _userId;
+    private ITestHarness _harness { get; set; } = null!;
 
     [OneTimeSetUp]
     public async Task RunBeforeAnyTests()
     {
         _database = await TestDatabaseFactory.CreateAsync();
 
-        _factory = new CustomWebApplicationFactory(_database.GetConnection());
+        _factory = new CustomWebApplicationFactory(_database.GetConnection(), ConfigureConsumers);
 
         _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
+
+        _harness = _factory.Services.GetRequiredService<ITestHarness>();
+        await _harness.Start();
     }
 
-    public static async Task<TResponse> SendAsync<TResponse>(ICommand request) where TResponse : class
+    /// <summary>
+    /// Consumers to run during the test.
+    /// </summary>
+    /// <param name="configurator"></param>
+    protected virtual void ConfigureConsumers(IBusRegistrationConfigurator configurator)
     {
-        using var scope = _scopeFactory.CreateScope();
-
-        var sender = scope.ServiceProvider.GetRequiredService<IRequestClient<TResponse>>();
-
-        var response =  await sender.GetResponse<TResponse>(request);
-        return response as TResponse ?? throw new Exception("Response is null");
     }
 
-    public static async Task SendAsync(ICommand request)
+    protected async Task<TResponse> SendAsync<TCommand, TResponse>(TCommand command)
+        where TCommand : class
+        where TResponse : class
     {
-        using var scope = _scopeFactory.CreateScope();
+        try
+        {
+            var requestClient = _harness.Bus.CreateRequestClient<TCommand>(TimeSpan.FromSeconds(5));
+            var response = await requestClient.GetResponse<TResponse>(command);
+            return response.Message;
+        }
+        catch (RequestTimeoutException ex)
+        {
+            var consumed = await _harness.Consumed.Any<TCommand>();
+            throw new Exception($"Request timed out. Message consumed: {consumed}", ex);
+        }
+    }
 
-        var sender = scope.ServiceProvider.GetRequiredService<IPublishEndpoint>();
+    protected async Task SendAsync(ICommand request)
+    {
+        await _harness.Bus.Publish(request);
+    }
 
-        await sender.Publish(request);
+    protected async Task<bool> ConsumedAsync<T>(T message) where T : class
+    {
+        return await _harness.Consumed.Any<T>(x => x.Context.Message.Equals(message));
     }
 
     public static string? GetUserId()
@@ -73,7 +90,7 @@ public partial class Testing
 
         var result = await userManager.CreateAsync(user, password);
 
-        if (roles.Any())
+        if (roles.Length != 0)
         {
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -97,48 +114,18 @@ public partial class Testing
         throw new Exception($"Unable to create {userName}.{Environment.NewLine}{errors}");
     }
 
-    public static async Task ResetState()
+    protected static async Task ResetState()
     {
         try
         {
             await _database.ResetAsync();
         }
-        catch (Exception) 
+        catch (Exception)
         {
+            // ignored
         }
 
         _userId = null;
-    }
-
-    public static async Task<TEntity?> FindAsync<TEntity>(params object[] keyValues)
-        where TEntity : class
-    {
-        using var scope = _scopeFactory.CreateScope();
-
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        return await context.FindAsync<TEntity>(keyValues);
-    }
-
-    public static async Task AddAsync<TEntity>(TEntity entity)
-        where TEntity : class
-    {
-        using var scope = _scopeFactory.CreateScope();
-
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        context.Add(entity);
-
-        await context.SaveChangesAsync();
-    }
-
-    public static async Task<int> CountAsync<TEntity>() where TEntity : class
-    {
-        using var scope = _scopeFactory.CreateScope();
-
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        return await context.Set<TEntity>().CountAsync();
     }
 
     [OneTimeTearDown]

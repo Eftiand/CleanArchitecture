@@ -1,15 +1,9 @@
-﻿using CleanArchitecture.Application.Common.Exceptions;
-using CleanArchitecture.Application.Common.Interfaces;
-using CleanArchitecture.Application.Common.Security;
-using CleanArchitecture.Application.TodoItems.Commands.CreateTodoItem;
+﻿using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Application.TodoItems.Commands.DeleteTodoItem;
-using CleanArchitecture.Application.TodoItems.Commands.UpdateTodoItem;
-using CleanArchitecture.Application.TodoItems.Commands.UpdateTodoItemDetail;
 using CleanArchitecture.Infrastructure.Common.Extensions;
-using MassTransit.Mediator;
+using CleanArchitecture.Shared.Contracts.Messaging;
+using CleanArchitecture.Shared.Contracts.Todos;
 using Microsoft.EntityFrameworkCore;
-using Shared.Contracts;
-using Shared.Contracts.Messaging;
 
 namespace CleanArchitecture.Web.Endpoints;
 
@@ -20,7 +14,6 @@ public class TodoItems : EndpointGroupBase
         app.MapGroup(this)
             .MapGet(Test, "test")
             .MapPost(CreateTodoItem)
-            .MapPut(UpdateTodoItem, "{id}")
             .MapGet(GetTodoItems)
             .MapDelete(DeleteTodoItem, "{id}");
     }
@@ -36,14 +29,8 @@ public class TodoItems : EndpointGroupBase
         CreateTodoItemCommand command,
         CancellationToken ct = default)
     {
-        var response = await sender.SendAsync<TodoCreatedResponse>(command, cancellationToken: ct);
+        var response = await sender.SendAsync<TodoItemCreatedResponse>(command, cancellationToken: ct);
         return Results.Ok(response);
-    }
-
-    private static async Task<IResult> UpdateTodoItem(IRequestClient<UpdateTodoItemCommand> sender, UpdateTodoItemDetailCommand command)
-    {
-        var result = await sender.GetResponse<TodoItemDeletedResponse>(command);
-        return Results.Ok(result.Message.Id);
     }
 
     private static async Task<IResult> DeleteTodoItem(IRequestClient<DeleteTodoItemCommand> sender, Guid id)

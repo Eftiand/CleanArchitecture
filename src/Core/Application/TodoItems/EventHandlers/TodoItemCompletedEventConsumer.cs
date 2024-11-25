@@ -1,11 +1,11 @@
-﻿using CleanArchitecture.Domain.Common;
-using CleanArchitecture.Domain.Events;
+﻿using CleanArchitecture.Shared.Contracts.Messaging;
+using CleanArchitecture.Shared.Contracts.Todos;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
 namespace CleanArchitecture.Application.TodoItems.EventHandlers;
 
-public class TodoItemCompletedEventHandler(ILogger<TodoItemCompletedEventHandler> logger)
+public class TodoItemCompletedEventConsumer(ILogger<TodoItemCompletedEventConsumer> logger)
     : BaseConsumer<TodoItemCompletedEvent, Guid>
 {
     public override Task Consume(ConsumeContext<TodoItemCompletedEvent> context)

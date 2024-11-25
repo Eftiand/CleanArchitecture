@@ -1,30 +1,23 @@
-﻿using CleanArchitecture.Application.Common.Exceptions;
+﻿using CleanArchitecture.Application.FunctionalTests.TestingFrameWork;
 using CleanArchitecture.Application.TodoItems.Commands.CreateTodoItem;
-using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Shared.Contracts.Todos;
+using MassTransit;
 
 namespace CleanArchitecture.Application.FunctionalTests.TodoItems.Commands;
 
-using static Testing;
-
 public class CreateTodoItemTests : BaseTestFixture
 {
-    [Test]
-    public async Task ShouldRequireMinimumFields()
+    protected override void ConfigureConsumers(IBusRegistrationConfigurator configurator)
     {
-        var command = new CreateTodoItemCommand(1);
-
-        await FluentActions.Invoking(() =>
-            SendAsync(command)).Should().ThrowAsync<ValidationException>();
+        configurator.AddConsumer<CreateTodoItemCommandConsumer>();
     }
 
     [Test]
-    public async Task ShouldCreateTodoItem()
+    public async Task ShouldConsumeCreateTodoItemCommand()
     {
-        var userId = await RunAsDefaultUserAsync();
+        var command = new CreateTodoItemCommand(11111, "Hello");
+        await SendAsync<CreateTodoItemCommand, TodoItemCreatedResponse>(command);
 
-        var command = new CreateTodoItemCommand(1, "Testing");
-
-        var count = await CountAsync<TodoItem>();
-        count.Should().Be(1);
+        Assert.That(await ConsumedAsync(command), Is.True);
     }
 }

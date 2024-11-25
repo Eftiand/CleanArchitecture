@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
-using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Infrastructure.Data;
+using MassTransit;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -8,14 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Identity.Client;
 using IUser = CleanArchitecture.Application.Common.Interfaces.IUser;
 
-namespace CleanArchitecture.Application.FunctionalTests;
+namespace CleanArchitecture.Application.FunctionalTests.TestingFrameWork;
 
 using static Testing;
 
-public class CustomWebApplicationFactory(DbConnection connection)
+public sealed class CustomWebApplicationFactory(DbConnection connection, Action<IBusRegistrationConfigurator>? configureConsumers = null)
     : WebApplicationFactory<Program>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -32,6 +31,15 @@ public class CustomWebApplicationFactory(DbConnection connection)
                 {
                     options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
                     options.UseNpgsql(connection);
+                });
+                services.AddMassTransitTestHarness(cfg =>
+                {
+                    configureConsumers?.Invoke(cfg);
+                    cfg.UsingInMemory((context, cfg) =>
+                    {
+                        // Configure endpoints explicitly
+                        cfg.ConfigureEndpoints(context);
+                    });
                 });
         });
     }

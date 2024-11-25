@@ -6,6 +6,7 @@ using CleanArchitecture.Infrastructure.Data.Interceptors;
 using CleanArchitecture.Infrastructure.Identity;
 using CleanArchitecture.Infrastructure.Messaging;
 using CleanArchitecture.Infrastructure.Messaging.Filters;
+using CleanArchitecture.Shared.Contracts.Messaging;
 using Mapster;
 using MassTransit;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +15,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shared.Const;
-using Shared.Contracts.Messaging;
 
 namespace CleanArchitecture.Infrastructure;
 
@@ -48,10 +48,35 @@ public static class DependencyInjection
 
         services.AddAuthorizationBuilder();
 
+        services.AddCustomMassTransit(configuration, config =>
+        {
+            config.AddConsumers(Assembly.Load(CommonConstants.Assemblies.Application));
+        });
+
+        services
+            .AddIdentityCore<ApplicationUser>()
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddApiEndpoints();
+
+        services.AddSingleton(TimeProvider.System);
+        services.AddTransient<IIdentityService, IdentityService>();
+        services.AddScoped<ISender, Sender>();
+
+        services.AddAuthorization(options =>
+            options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
+
+        return services;
+    }
+
+    public static IServiceCollection AddCustomMassTransit(this IServiceCollection services, IConfiguration configuration, Action<IBusRegistrationConfigurator>? configure = null)
+    {
         services.AddMassTransit(config =>
         {
             config.SetKebabCaseEndpointNameFormatter();
-            config.AddConsumers(Assembly.Load(CommonConstants.Assemblies.Application));
+
+            // Allow additional configuration before RabbitMQ setup
+            configure?.Invoke(config);
 
             config.UsingRabbitMq((context, cfg) =>
             {
@@ -71,19 +96,6 @@ public static class DependencyInjection
                 cfg.ConfigureEndpoints(context);
             });
         });
-
-        services
-            .AddIdentityCore<ApplicationUser>()
-            .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddApiEndpoints();
-
-        services.AddSingleton(TimeProvider.System);
-        services.AddTransient<IIdentityService, IdentityService>();
-        services.AddScoped<ISender, Sender>();
-
-        services.AddAuthorization(options =>
-            options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
 
         return services;
     }

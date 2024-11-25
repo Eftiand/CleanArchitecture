@@ -1,6 +1,4 @@
-using System.Windows.Input;
-
-namespace Shared.Contracts.Messaging;
+namespace CleanArchitecture.Shared.Contracts.Messaging;
 
 public interface ISender
 {

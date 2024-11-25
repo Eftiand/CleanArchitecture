@@ -1,4 +1,4 @@
-﻿namespace CleanArchitecture.Application.FunctionalTests;
+﻿namespace CleanArchitecture.Application.FunctionalTests.TestingFrameWork;
 
 public static class TestDatabaseFactory
 {

@@ -1,6 +1,6 @@
 using MassTransit;
 
-namespace CleanArchitecture.Domain.Common;
+namespace CleanArchitecture.Shared.Contracts.Messaging;
 
 public abstract class BaseConsumer<TCommand, TResponse> : BaseConsumer<TCommand>
     where TCommand : class;

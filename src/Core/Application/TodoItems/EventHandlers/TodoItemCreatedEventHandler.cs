@@ -1,19 +1,18 @@
-﻿using CleanArchitecture.Domain.Common;
-using CleanArchitecture.Domain.Events;
+﻿using CleanArchitecture.Shared.Contracts.Messaging;
+using CleanArchitecture.Shared.Contracts.Todos;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using Shared.Contracts;
 
 namespace CleanArchitecture.Application.TodoItems.EventHandlers;
 
 public class TodoItemCreatedEventHandler(ILogger<TodoItemCreatedEventHandler> logger)
-    : BaseConsumer<TodoItemCreatedEvent>
+    : BaseConsumer<TodoCreatedEvent>
 {
-    public override Task Consume(ConsumeContext<TodoItemCreatedEvent> context)
+    public override Task Consume(ConsumeContext<TodoCreatedEvent> context)
     {
         logger.LogInformation("CleanArchitecture Domain Event: {DomainEvent}", Message.GetType().Name);
 
-        context.RespondAsync(new TodoCreatedResponse(context.Message.Item.Id));
+        context.RespondAsync(new TodoItemCreatedResponse(context.Message.TodoId));
 
         return Task.CompletedTask;
     }

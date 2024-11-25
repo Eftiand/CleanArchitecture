@@ -1,4 +1,6 @@
-﻿namespace CleanArchitecture.Application.TodoItems.Commands.CreateTodoItem;
+﻿using CleanArchitecture.Shared.Contracts.Todos;
+
+namespace CleanArchitecture.Application.TodoItems.Commands.CreateTodoItem;
 
 public class CreateTodoItemCommandValidator : AbstractValidator<CreateTodoItemCommand>
 {

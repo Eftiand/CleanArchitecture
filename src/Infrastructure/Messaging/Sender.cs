@@ -1,6 +1,6 @@
+using CleanArchitecture.Shared.Contracts.Messaging;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
-using Shared.Contracts.Messaging;
 
 namespace CleanArchitecture.Infrastructure.Messaging;
 

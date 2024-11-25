@@ -2,6 +2,7 @@
 using CleanArchitecture.Domain.Common;
 using CleanArchitecture.Domain.Entities;
 using CleanArchitecture.Domain.Exceptions;
+using CleanArchitecture.Shared.Contracts.Messaging;
 using Mapster;
 using MassTransit;
 
