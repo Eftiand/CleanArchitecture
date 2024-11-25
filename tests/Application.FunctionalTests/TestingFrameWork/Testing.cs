@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Domain.Constants;
+﻿using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Domain.Constants;
 using CleanArchitecture.Infrastructure.Identity;
 using MassTransit;
 using MassTransit.Testing;
@@ -14,8 +15,11 @@ public abstract class Testing
     private static ITestDatabase _database = null!;
     private static CustomWebApplicationFactory _factory = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
+    private IServiceScope _scope;
     private static string? _userId;
+
     private ITestHarness _harness { get; set; } = null!;
+    protected IApplicationDbContext DbContext { get; set; } = null!;
 
     [OneTimeSetUp]
     public async Task RunBeforeAnyTests()
@@ -26,7 +30,12 @@ public abstract class Testing
 
         _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
 
+        _scope = _scopeFactory.CreateScope();
+
         _harness = _factory.Services.GetRequiredService<ITestHarness>();
+
+        DbContext = _scope.ServiceProvider.GetRequiredService<IApplicationDbContext>();
+
         await _harness.Start();
     }
 
@@ -44,7 +53,7 @@ public abstract class Testing
     {
         try
         {
-            var requestClient = _harness.Bus.CreateRequestClient<TCommand>(TimeSpan.FromSeconds(5));
+            var requestClient = _harness.Bus.CreateRequestClient<TCommand>();
             var response = await requestClient.GetResponse<TResponse>(command);
             return response.Message;
         }
@@ -131,6 +140,7 @@ public abstract class Testing
     [OneTimeTearDown]
     public async Task RunAfterAnyTests()
     {
+        _scope.Dispose();
         await _database.DisposeAsync();
         await _factory.DisposeAsync();
     }

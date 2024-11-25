@@ -80,12 +80,7 @@ public static class DependencyInjection
 
             config.UsingRabbitMq((context, cfg) =>
             {
-                cfg.UseConsumeFilter(typeof(UnhandledExceptionFilter<>), context);
-                cfg.UseConsumeFilter(typeof(LoggingFilter<>), context);
-                cfg.UseConsumeFilter(typeof(PerformanceFilter<>), context);
-                cfg.UseConsumeFilter(typeof(AuthorizationFilter<>), context);
-                cfg.UseConsumeFilter(typeof(ValidationFilter<>), context);
-                cfg.UseConsumeFilter(typeof(UnitOfWorkFilter<>), context);
+                PipelineConfig.ConfigurePipeline(cfg, context);
 
                 cfg.Host(configuration.GetConnectionString(CommonConstants.Aspire.RabbitMq), h =>
                 {
@@ -99,4 +94,16 @@ public static class DependencyInjection
 
         return services;
     }
+}
+public static class PipelineConfig
+{
+    public static readonly Action<IBusFactoryConfigurator, IRegistrationContext> ConfigurePipeline = (cfg, context) =>
+    {
+        cfg.UseConsumeFilter(typeof(UnhandledExceptionFilter<>), context);
+        cfg.UseConsumeFilter(typeof(LoggingFilter<>), context);
+        cfg.UseConsumeFilter(typeof(PerformanceFilter<>), context);
+        cfg.UseConsumeFilter(typeof(AuthorizationFilter<>), context);
+        cfg.UseConsumeFilter(typeof(ValidationFilter<>), context);
+        cfg.UseConsumeFilter(typeof(UnitOfWorkFilter<>), context);
+    };
 }

@@ -1,4 +1,5 @@
 ﻿using System.Data.Common;
+using CleanArchitecture.Infrastructure;
 using CleanArchitecture.Infrastructure.Data;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,8 @@ public sealed class CustomWebApplicationFactory(DbConnection connection, Action<
                     configureConsumers?.Invoke(cfg);
                     cfg.UsingInMemory((context, cfg) =>
                     {
+                        PipelineConfig.ConfigurePipeline(cfg, context);
+
                         // Configure endpoints explicitly
                         cfg.ConfigureEndpoints(context);
                     });
