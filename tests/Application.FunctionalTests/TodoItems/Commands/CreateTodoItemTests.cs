@@ -1,5 +1,5 @@
 ﻿using CleanArchitecture.Application.FunctionalTests.TestingFrameWork;
-using CleanArchitecture.Application.TodoItems.Commands.CreateTodoItem;
+using CleanArchitecture.Application.TodoItems.Consumers;
 using CleanArchitecture.Shared.Contracts.Todos;
 using MassTransit;
 

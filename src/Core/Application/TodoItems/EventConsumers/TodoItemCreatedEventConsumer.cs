@@ -3,16 +3,14 @@ using CleanArchitecture.Shared.Contracts.Todos;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitecture.Application.TodoItems.EventHandlers;
+namespace CleanArchitecture.Application.TodoItems.EventConsumers;
 
-public class TodoItemCreatedEventHandler(ILogger<TodoItemCreatedEventHandler> logger)
+public class TodoItemCreatedEventConsumer(ILogger<TodoItemCreatedEventConsumer> logger)
     : BaseConsumer<TodoCreatedEvent>
 {
     public override Task Consume(ConsumeContext<TodoCreatedEvent> context)
     {
         logger.LogInformation("CleanArchitecture Domain Event: {DomainEvent}", Message.GetType().Name);
-
-        context.RespondAsync(new TodoItemCreatedResponse(context.Message.TodoId));
 
         return Task.CompletedTask;
     }

@@ -3,7 +3,7 @@ using CleanArchitecture.Shared.Contracts.Messaging;
 using CleanArchitecture.Shared.Contracts.Todos;
 using MassTransit;
 
-namespace CleanArchitecture.Application.TodoItems.Commands.DeleteTodoItem;
+namespace CleanArchitecture.Application.TodoItems.Consumers;
 
 public record TodoItemDeletedResponse(Guid Id);
 

@@ -3,7 +3,7 @@ using CleanArchitecture.Shared.Contracts.Todos;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitecture.Application.TodoItems.EventHandlers;
+namespace CleanArchitecture.Application.TodoItems.EventConsumers;
 
 public class TodoItemCompletedEventConsumer(ILogger<TodoItemCompletedEventConsumer> logger)
     : BaseConsumer<TodoItemCompletedEvent, Guid>
