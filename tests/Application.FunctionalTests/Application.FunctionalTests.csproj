@@ -20,6 +20,7 @@
     <ItemGroup>
         <PackageReference Include="Bogus" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="nunit" />
         <PackageReference Include="NUnit.Analyzers">
@@ -35,9 +36,12 @@
         <PackageReference Include="Moq" />
         <PackageReference Include="Respawn" />
         <PackageReference Include="Respawn.Postgres" />
+        <PackageReference Include="System.Drawing.Common" />
+        <PackageReference Include="System.Formats.Asn1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
         <PackageReference Include="Testcontainers.PostgreSql" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <ProjectReference Include="..\..\src\Web\Web.csproj" />
     </ItemGroup>
