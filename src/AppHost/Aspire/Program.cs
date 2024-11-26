@@ -2,8 +2,7 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
     .WithDataVolume()
-    .WithLifetime(ContainerLifetime.Persistent)
-    .WithPgAdmin();
+    .WithLifetime(ContainerLifetime.Persistent);
 
 var username = builder.AddParameter("username", secret: true);
 var password = builder.AddParameter("password", secret: true);
