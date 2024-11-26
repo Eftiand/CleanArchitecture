@@ -10,6 +10,7 @@
       <PackageReference Include="MassTransit.Abstractions" />
       <PackageReference Include="Microsoft.Identity.Client" />
       <PackageReference Include="Serilog.AspNetCore" />
+      <PackageReference Remove="System.IdentityModel.Tokens.Jwt" />
     </ItemGroup>
 
 </Project>

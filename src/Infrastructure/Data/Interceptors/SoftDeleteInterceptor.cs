@@ -1,6 +1,6 @@
+using CleanArchitecture.Domain.Common.BaseEntities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using CleanArchitecture.Domain.Common.BaseEntities;
 
 namespace CleanArchitecture.Infrastructure.Data.Interceptors;
 

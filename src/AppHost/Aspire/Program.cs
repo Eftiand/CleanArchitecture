@@ -2,12 +2,16 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
     .WithDataVolume()
+    .WithLifetime(ContainerLifetime.Persistent)
     .WithPgAdmin();
 
-var rabbitmq = builder.AddRabbitMQ("rabbitmq")
+var username = builder.AddParameter("username", secret: true);
+var password = builder.AddParameter("password", secret: true);
+
+var rabbitmq = builder.AddRabbitMQ("rabbitmq", username, password)
     .WithManagementPlugin()
-    .WithEnvironment("RABBITMQ_DEFAULT_USER", "guest")
-    .WithEnvironment("RABBITMQ_DEFAULT_PASS", "guest");
+    .WithDataVolume(isReadOnly: false)
+    .WithLifetime(ContainerLifetime.Persistent);
 
 builder.AddProject<Projects.Web>("web-api")
     .WithReference(postgres)

@@ -1,0 +1,30 @@
+﻿<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="CleanArchitecture.nuspec" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src\Infrastructure\Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="src\Shared\Shared.csproj" Type="Classic C#" />
+    <Project Path="src\Web\Web.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/AppHost/">
+    <Project Path="src\AppHost\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj" Type="Classic C#" />
+    <Project Path="src\AppHost\Aspire\Aspire.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/src/Core/">
+    <Project Path="src\Core\Application\Application.csproj" Type="Classic C#" />
+    <Project Path="src\Core\Domain\Domain.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests\Application.FunctionalTests\Application.FunctionalTests.csproj" />
+    <Project Path="tests\Domain.UnitTests\Domain.UnitTests.csproj" />
+    <Project Path="tests\Infrastructure.IntegrationTests\Infrastructure.IntegrationTests.csproj" Type="Classic C#" />
+  </Folder>
+</Solution>
