@@ -20,6 +20,7 @@ public static class CommonConstants
     public static class Aspire
     {
         public const string RabbitMq = "rabbitmq";
+        public const string Redis = "redis";
         public const string Postgres = "postgres";
     }
 

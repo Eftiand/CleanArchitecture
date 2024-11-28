@@ -7,6 +7,8 @@ using CleanArchitecture.Infrastructure.Identity;
 using CleanArchitecture.Infrastructure.Messaging;
 using CleanArchitecture.Infrastructure.Messaging.Filters;
 using CleanArchitecture.Shared.Contracts.Messaging;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Mapster;
 using MassTransit;
 using Microsoft.AspNetCore.Identity;
@@ -27,6 +29,7 @@ public static class DependencyInjection
         Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
 
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
@@ -66,6 +69,8 @@ public static class DependencyInjection
         services.AddAuthorization(options =>
             options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
 
+        services.AddHangfireImplementation(configuration);
+
         return services;
     }
 
@@ -94,7 +99,24 @@ public static class DependencyInjection
 
         return services;
     }
+
+    public static IServiceCollection AddHangfireImplementation(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddHangfire(config => config
+            .UsePostgreSqlStorage(options =>
+            {
+                options.UseNpgsqlConnection(configuration.GetConnectionString(CommonConstants.Aspire.Postgres));
+            })
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings());
+
+        services.AddHangfireServer();
+
+        return services;
+    }
+
 }
+
 public static class PipelineConfig
 {
     public static readonly Action<IBusFactoryConfigurator, IRegistrationContext> ConfigurePipeline = (cfg, context) =>

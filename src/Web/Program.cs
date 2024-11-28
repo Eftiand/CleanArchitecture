@@ -1,6 +1,8 @@
 using CleanArchitecture.Application;
+using CleanArchitecture.Application.Common.Interfaces;
 using CleanArchitecture.Infrastructure;
 using CleanArchitecture.Infrastructure.Data;
+using Delta;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +31,8 @@ else
 }
 
 app.UseSerilogRequestLogging();
+// When Delta can be used with postgres activate this.
+//app.UseDelta<ApplicationDbContext>();
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 app.UseExceptionHandler();
