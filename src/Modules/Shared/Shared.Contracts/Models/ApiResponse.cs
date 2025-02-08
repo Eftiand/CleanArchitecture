@@ -1,4 +1,4 @@
-namespace coaches.Modules.Shared.Application.Common.Models;
+namespace coaches.Modules.Shared.Contracts.Models;
 
 public record class ApiResponse<TData>
 {

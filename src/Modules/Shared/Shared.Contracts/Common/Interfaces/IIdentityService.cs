@@ -1,6 +1,6 @@
-﻿using coaches.Modules.Shared.Application.Common.Models;
+﻿using coaches.Modules.Shared.Contracts.Models;
 
-namespace coaches.Modules.Shared.Application.Common.Interfaces;
+namespace coaches.Modules.Shared.Contracts.Common.Interfaces;
 
 public interface IIdentityService
 {

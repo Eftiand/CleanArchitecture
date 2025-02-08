@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using coaches.Modules.Todos.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Todos.Domain.Entities;
 
 namespace coaches.Infrastructure.Data.Configurations.Todos;
 

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace coaches.Modules.Shared.Application.Common.Extensions;
+namespace coaches.Modules.Shared.Contracts.Common.Extensions;
 
 public static class StringExtensions
 {

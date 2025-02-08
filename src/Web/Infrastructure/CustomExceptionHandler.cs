@@ -1,7 +1,6 @@
-﻿using coaches.Modules.Shared.Application.Common.Exceptions;
-using coaches.Modules.Shared.Contracts.Common.Exceptions;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Application.Exceptions;
 
 namespace coaches.Web.Infrastructure;
 

@@ -1,6 +1,6 @@
 
 using System.Text.Json;
-using coaches.Modules.Shared.Application.Common.Models;
+using coaches.Modules.Shared.Contracts.Models;
 using MassTransit;
 
 namespace coaches.Infrastructure.Common.Extensions;

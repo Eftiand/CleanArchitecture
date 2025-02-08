@@ -1,5 +1,5 @@
 using coaches.Infrastructure.Identity;
-using coaches.Modules.Shared.Application.Common.Constants;
+using coaches.Modules.Shared.Contracts.Constants;
 using MassTransit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

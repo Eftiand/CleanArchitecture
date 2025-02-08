@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace coaches.Modules.Shared.Application.Common.Helpers;
+namespace coaches.Modules.Shared.Contracts.Common.Helpers;
 
 public class PromptBuilder
 {

@@ -1,5 +1,5 @@
-using coaches.Modules.Shared.Application.Common.Interfaces;
-using coaches.Modules.Shared.Application.Common.Models;
+using coaches.Modules.Shared.Contracts.Common.Interfaces;
+using coaches.Modules.Shared.Contracts.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

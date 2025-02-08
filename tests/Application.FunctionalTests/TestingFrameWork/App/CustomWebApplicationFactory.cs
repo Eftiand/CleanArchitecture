@@ -3,6 +3,7 @@ using coaches.Application.FunctionalTests.TestingFrameWork.Fixtures;
 using coaches.Infrastructure;
 using coaches.Infrastructure.Common.Extensions;
 using coaches.Infrastructure.Data;
+using coaches.Modules.Shared.Contracts.Common.Interfaces;
 using coaches.Web;
 using MassTransit;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +12,6 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using IUser = coaches.Modules.Shared.Application.Common.Interfaces.IUser;
 
 namespace coaches.Application.FunctionalTests.TestingFrameWork.App;
 

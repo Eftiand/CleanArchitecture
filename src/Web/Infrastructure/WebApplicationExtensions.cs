@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
-using coaches.Modules.Shared.Application.Common.Constants;
-using coaches.Modules.Shared.Application.Common.Extensions;
+using coaches.Modules.Shared.Contracts.Common.Extensions;
 using coaches.Modules.Shared.Contracts.Constants;
 
 namespace coaches.Web.Infrastructure;

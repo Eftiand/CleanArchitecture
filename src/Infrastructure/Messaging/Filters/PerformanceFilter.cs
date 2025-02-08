@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using coaches.Modules.Shared.Application.Common.Interfaces;
+using coaches.Modules.Shared.Contracts.Common.Interfaces;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 

@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Todos.Domain.Entities;
+﻿using coaches.Modules.Todos.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace coaches.Modules.Shared.Contracts.Common.Interfaces;
 

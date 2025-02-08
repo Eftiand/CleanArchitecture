@@ -1,7 +1,6 @@
 ﻿using coaches.Application.FunctionalTests.TestingFrameWork.App;
 using coaches.Application.FunctionalTests.TestingFrameWork.Database;
 using coaches.Infrastructure.Identity;
-using coaches.Modules.Shared.Application.Common.Interfaces;
 using coaches.Modules.Shared.Contracts.Common.Interfaces;
 using MassTransit;
 using MassTransit.Testing;

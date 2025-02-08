@@ -1,13 +1,12 @@
-﻿using coaches.Modules.Shared.Application.Common.Exceptions;
-using coaches.Modules.Shared.Application.Common.Interfaces;
-using coaches.Modules.Shared.Application.Common.Models;
-using coaches.Modules.Shared.Contracts.Common.Interfaces;
+﻿using coaches.Modules.Shared.Contracts.Common.Interfaces;
 using coaches.Modules.Shared.Contracts.Consumers;
+using coaches.Modules.Shared.Contracts.Models;
 using coaches.Modules.Todos.Contracts.Commands;
+using coaches.Modules.Todos.Domain.Entities;
 using FluentValidation;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Todos.Domain.Entities;
+using Shared.Application.Exceptions;
 
 namespace coaches.Modules.Todos.Application.Consumers;
 

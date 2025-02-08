@@ -1,6 +1,5 @@
-﻿using coaches.Modules.Shared.Application.Common.Interfaces;
-using coaches.Modules.Shared.Application.Common.Models;
-using coaches.Modules.Shared.Contracts.Common.Interfaces;
+﻿using coaches.Modules.Shared.Contracts.Common.Interfaces;
+using coaches.Modules.Shared.Contracts.Models;
 using coaches.Modules.Todos.Contracts.Commands;
 using coaches.Web.Common;
 using Microsoft.EntityFrameworkCore;

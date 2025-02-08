@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace coaches.Modules.Shared.Contracts.Common.Exceptions;
+namespace Shared.Application.Exceptions;
 
 public class ValidationException()
     : Exception("One or more validation failures have occurred.")

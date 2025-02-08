@@ -1,11 +1,11 @@
 ﻿using coaches.Application.FunctionalTests.TestingFrameWork.Fixtures;
-using coaches.Modules.Shared.Application.Common.Models;
-using coaches.Modules.Shared.Contracts.Events;
+using coaches.Modules.Shared.Contracts.Models;
+using coaches.Modules.Shared.Domain.Events;
 using coaches.Modules.Todos.Application.Consumers;
 using coaches.Modules.Todos.Contracts.Commands;
+using coaches.Modules.Todos.Domain.Entities;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using Todos.Domain.Entities;
 
 namespace coaches.Application.FunctionalTests.TodoItems.Commands;
 

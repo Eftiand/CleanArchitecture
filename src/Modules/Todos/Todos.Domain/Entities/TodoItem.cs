@@ -1,6 +1,6 @@
 ﻿using coaches.Modules.Shared.Domain.BaseEntities;
 
-namespace Todos.Domain.Entities;
+namespace coaches.Modules.Todos.Domain.Entities;
 
 public class TodoItem : BaseAuditableEntity
 {

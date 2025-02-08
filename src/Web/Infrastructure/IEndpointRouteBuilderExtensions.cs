@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using coaches.Modules.Shared.Application.Common.Extensions;
+using coaches.Modules.Shared.Contracts.Common.Extensions;
 
 namespace coaches.Web.Infrastructure;
 

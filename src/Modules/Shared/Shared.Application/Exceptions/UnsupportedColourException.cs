@@ -1,4 +1,4 @@
-﻿namespace coaches.Modules.Shared.Application.Common.Exceptions;
+﻿namespace Shared.Application.Exceptions;
 
 public class UnsupportedColourException(string code)
     : Exception($"Colour \"{code}\" is unsupported.");

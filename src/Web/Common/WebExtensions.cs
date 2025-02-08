@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using coaches.Modules.Shared.Application.Common.Models;
+using coaches.Modules.Shared.Contracts.Models;
 
 namespace coaches.Web.Common;
 

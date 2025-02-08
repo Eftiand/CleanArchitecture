@@ -1,4 +1,4 @@
-using coaches.Modules.Shared.Contracts.Events.@base;
+using coaches.Modules.Shared.Domain.BaseEntities.Base;
 
 namespace coaches.Modules.Todos.Contracts.Commands;
 

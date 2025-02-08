@@ -1,4 +1,4 @@
-namespace coaches.Modules.Shared.Application.Common.Exceptions;
+namespace Shared.Application.Exceptions;
 
 public static class CommonExceptions
 {

@@ -1,6 +1,6 @@
-using coaches.Modules.Shared.Contracts.Events.@base;
+using coaches.Modules.Shared.Domain.BaseEntities.Base;
 
-namespace coaches.Modules.Shared.Contracts.Events;
+namespace coaches.Modules.Shared.Domain.Events;
 
 public abstract record EntityEvent<T> : BaseIntegrationEvent<T>
 {

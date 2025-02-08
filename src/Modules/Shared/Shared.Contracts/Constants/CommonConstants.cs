@@ -6,9 +6,34 @@ public static class CommonConstants
     {
         public const string TodosApplication = "coaches.Module.Todos.Application";
         public const string Infrastructure = "coaches.Infrastructure";
-        public const string WebApi = "coaches.WebApi";
+        public const string WebApi = "coaches.Web";
 
-        public const string Modules = "coaches.Modules";
+        public static class Modules
+        {
+            private const string Namespace = "coaches.Modules";
+
+            private static readonly string[] ModuleNames =
+            {
+                //"Kernel",
+                "Todos",
+                "Shared",
+            };
+
+            public static Dictionary<string, string> AllApplications => ModuleNames.ToDictionary(
+                name => name,
+                name => $"{Namespace}.{name}.Application"
+            );
+
+            public static Dictionary<string, string> AllContracts => ModuleNames.ToDictionary(
+                name => name,
+                name => $"{Namespace}.{name}.Contracts"
+            );
+
+            public static Dictionary<string, string> AllDomains => ModuleNames.ToDictionary(
+                name => name,
+                name => $"{Namespace}.{name}.Domain"
+            );
+        }
     }
 
     public static class Api

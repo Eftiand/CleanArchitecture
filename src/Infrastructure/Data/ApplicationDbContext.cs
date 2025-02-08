@@ -1,14 +1,13 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
 using coaches.Infrastructure.Identity;
-using coaches.Modules.Shared.Application.Common.Interfaces;
 using coaches.Modules.Shared.Contracts.Common.Interfaces;
 using coaches.Modules.Shared.Domain.BaseEntities;
+using coaches.Modules.Todos.Domain.Entities;
 using MassTransit;
 using MassTransit.EntityFrameworkCoreIntegration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Todos.Domain.Entities;
 
 namespace coaches.Infrastructure.Data;
 

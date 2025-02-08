@@ -33,10 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared.Application\Shared.Application.csproj" />
-    <ProjectReference Include="..\..\Shared.Contracts\Shared.Contracts.csproj" />
-    <ProjectReference Include="..\..\Todos.Domain\Todos.Domain.csproj" />
     <ProjectReference Include="..\AppHost\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Modules\Shared\Shared.Application\Shared.Application.csproj" />
+    <ProjectReference Include="..\Modules\Shared\Shared.Contracts\Shared.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

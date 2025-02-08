@@ -1,7 +1,7 @@
-﻿using coaches.Modules.Shared.Application.Common.Models;
+﻿using coaches.Modules.Shared.Contracts.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace coaches.Modules.Shared.Application.Common.Mappings;
+namespace coaches.Modules.Shared.Contracts.Common.Mappings;
 
 public static class MappingExtensions
 {

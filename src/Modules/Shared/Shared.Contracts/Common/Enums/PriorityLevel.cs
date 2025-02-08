@@ -1,4 +1,4 @@
-﻿namespace coaches.Modules.Shared.Application.Common.Enums;
+﻿namespace coaches.Modules.Shared.Contracts.Common.Enums;
 
 public enum PriorityLevel
 {

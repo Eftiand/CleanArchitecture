@@ -1,4 +1,4 @@
-﻿namespace coaches.Modules.Shared.Application.Common.Interfaces;
+﻿namespace coaches.Modules.Shared.Contracts.Common.Interfaces;
 
 public interface IUser
 {

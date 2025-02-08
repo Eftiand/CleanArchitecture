@@ -43,8 +43,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />
+        <ProjectReference Include="..\..\src\Modules\Shared\Shared.Contracts\Shared.Contracts.csproj" />
+        <ProjectReference Include="..\..\src\Modules\Shared\Shared.Domain\Shared.Domain.csproj" />
+        <ProjectReference Include="..\..\src\Modules\Todos\Todos.Application\Todos.Application.csproj" />
+        <ProjectReference Include="..\..\src\Modules\Todos\Todos.Contracts\Todos.Contracts.csproj" />
+        <ProjectReference Include="..\..\src\Modules\Todos\Todos.Domain\Todos.Domain.csproj" />
         <ProjectReference Include="..\..\src\Web\Web.csproj" />
-        <ProjectReference Include="..\..\Todos.Application\Todos.Application.csproj" />
     </ItemGroup>
 
 </Project>

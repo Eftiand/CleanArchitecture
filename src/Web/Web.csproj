@@ -9,6 +9,8 @@
     <ProjectReference Include="..\..\Todos.Contracts\Todos.Contracts.csproj" />
     <ProjectReference Include="..\AppHost\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Shared\Shared.Registry\Shared.Registry.csproj" />
+    <ProjectReference Include="..\Modules\Todos\Todos.Contracts\Todos.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

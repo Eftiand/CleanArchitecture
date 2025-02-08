@@ -1,5 +1,5 @@
-using coaches.Modules.Shared.Application.Common.Models;
-using coaches.Modules.Shared.Contracts.Events.@base;
+using coaches.Modules.Shared.Contracts.Models;
+using coaches.Modules.Shared.Domain.BaseEntities.Base;
 
 namespace coaches.Modules.Todos.Contracts.Commands;
 

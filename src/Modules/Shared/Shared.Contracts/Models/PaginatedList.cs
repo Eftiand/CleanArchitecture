@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace coaches.Modules.Shared.Application.Common.Models;
+namespace coaches.Modules.Shared.Contracts.Models;
 
 public class PaginatedList<T>
 {

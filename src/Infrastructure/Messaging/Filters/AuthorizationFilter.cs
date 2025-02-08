@@ -2,10 +2,10 @@ using System.Collections.Immutable;
 using System.Net;
 using System.Reflection;
 using coaches.Infrastructure.Common.Extensions;
-using coaches.Modules.Shared.Application.Common.Exceptions;
-using coaches.Modules.Shared.Application.Common.Interfaces;
-using coaches.Modules.Shared.Application.Common.Security;
+using coaches.Modules.Shared.Contracts.Common.Interfaces;
+using coaches.Modules.Shared.Contracts.Common.Security;
 using MassTransit;
+using Shared.Application.Exceptions;
 
 namespace coaches.Infrastructure.Messaging.Filters;
 

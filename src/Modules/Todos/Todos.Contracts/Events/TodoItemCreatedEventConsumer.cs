@@ -1,8 +1,8 @@
 ﻿using coaches.Modules.Shared.Contracts.Consumers;
-using coaches.Modules.Shared.Contracts.Events;
+using coaches.Modules.Shared.Domain.Events;
+using coaches.Modules.Todos.Domain.Entities;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using Todos.Domain.Entities;
 
 namespace coaches.Modules.Todos.Contracts.Events;
 

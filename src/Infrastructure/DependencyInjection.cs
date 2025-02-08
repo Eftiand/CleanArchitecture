@@ -4,8 +4,6 @@ using coaches.Infrastructure.Data.Interceptors;
 using coaches.Infrastructure.Identity;
 using coaches.Infrastructure.Messaging;
 using coaches.Infrastructure.Messaging.Filters;
-using coaches.Modules.Shared.Application.Common.Constants;
-using coaches.Modules.Shared.Application.Common.Interfaces;
 using coaches.Modules.Shared.Contracts.Common.Interfaces;
 using coaches.Modules.Shared.Contracts.Constants;
 using Hangfire;

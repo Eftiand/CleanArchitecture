@@ -1,8 +1,8 @@
-using coaches.Modules.Shared.Application.Common.Interfaces;
-using coaches.Modules.Shared.Contracts.Events;
+using coaches.Modules.Shared.Contracts.Common.Interfaces;
+using coaches.Modules.Shared.Domain.Events;
+using coaches.Modules.Todos.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Todos.Domain.Entities;
 
 namespace coaches.Infrastructure.Data.Interceptors;
 

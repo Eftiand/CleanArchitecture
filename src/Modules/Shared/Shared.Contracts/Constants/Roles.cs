@@ -1,4 +1,4 @@
-﻿namespace coaches.Modules.Shared.Application.Common.Constants;
+﻿namespace coaches.Modules.Shared.Contracts.Constants;
 
 public abstract class Roles
 {

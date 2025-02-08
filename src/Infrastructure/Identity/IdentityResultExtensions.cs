@@ -1,4 +1,4 @@
-﻿using coaches.Modules.Shared.Application.Common.Models;
+﻿using coaches.Modules.Shared.Contracts.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace coaches.Infrastructure.Identity;

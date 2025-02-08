@@ -1,4 +1,4 @@
-﻿namespace coaches.Modules.Shared.Application.Common.Security;
+﻿namespace coaches.Modules.Shared.Contracts.Common.Security;
 
 /// <summary>
 ///     Specifies
