@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Eftiand",
+  "classifications": [
+	"Web",
+	"API",
+	"ASP.NET",
+	"Coaches"
+  ],
+  "name": "Coaches Solution",
+  "description": "Default coaches project",
+  "identity": "Coaches.Solution.CSharp",
+  "groupIdentity": "Coaches.Solution",
+  "shortName": "coach-sln",
+  "tags": {
+	"language": "C#",
+	"type": "project"
+  },
+  "sourceName": "coaches",
+  "preferNameDirectory": true
+}

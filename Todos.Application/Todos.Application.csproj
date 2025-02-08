@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+    <RootNamespace>coaches.Modules.Todos.Application</RootNamespace>
+    <AssemblyName>coaches.Modules.Todos.Application</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Todos.Contracts\Todos.Contracts.csproj" />
+      <ProjectReference Include="..\Todos.Domain\Todos.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Ardalis.GuardClauses" />
+    </ItemGroup>
+
+</Project>

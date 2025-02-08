@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>coaches.Domain</RootNamespace>
+    <AssemblyName>coaches.Domain</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.Abstractions" />
+    <PackageReference Remove="System.IdentityModel.Tokens.Jwt" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,44 @@
+name: github-pipeline
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+        ports:
+          - 2375:2375
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Restore dependencies
+        run: dotnet restore ./src/AppHost/Aspire/Aspire.csproj
+
+      - name: Build
+        run: dotnet build ./src/AppHost/Aspire/Aspire.csproj --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --configuration Release --verbosity normal
+        env:
+          DOCKER_HOST: tcp://localhost:2375
+          TESTCONTAINERS_RYUK_DISABLED: true
